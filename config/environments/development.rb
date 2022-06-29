@@ -38,10 +38,10 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   config.action_mailer.smtp_settings = {
-  :address              => "smtp.gmail.com",
+  :address              => "smtp-relay.sendinblue.com",
   :port                 => 587,
   :user_name            => "elton.avionschool@gmail.com",
-  :password             => "ltzrqqnbebmhuxpd",
+  :password             => "gpH9YzG4mhZ1LcEO",
   :authentication       => "plain",
   :enable_starttls_auto => true
   }
