@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :dashboard, only: [:index]
+  resources :dashboard, only: [:index, :pending_users]
+  get '/dashboard/pending_users', to: 'dashboard#pending_users'
   resources :home, only: [:index]
   devise_scope :user do
     root to: "devise/sessions#new"

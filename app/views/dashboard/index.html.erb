@@ -1,2 +1,21 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<h1>List of users</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>EMAIL</th>
+            <th>ROLE</th>
+            <th>STATUS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @registered_users.each do |user|%>
+            <tr>
+                <td><%= user.email%></td>
+                <td><%= user.admin === true ? "Admin" : "Trader"%></td>
+                <td><%= user.approved === false ? "Pending" : "Approved"%></td>
+            </tr>
+        <%end%>
+    </tbody>
+</table>
+
