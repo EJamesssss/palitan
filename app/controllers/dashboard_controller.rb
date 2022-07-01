@@ -6,22 +6,9 @@ class DashboardController < ApplicationController
   end
 
   def show
+    @registered_users = User.find(params[:id])
   end
 
-  def new
-  end
-
-  def edit
-  end
-
-  def create
-  end
-
-  def update
-  end
-
-  def destroy
-  end
 
   def pending_users
     @unapproved = User.where("approved = ?", false)
