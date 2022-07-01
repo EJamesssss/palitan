@@ -32,7 +32,7 @@
         <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
         <%= f.password_field :current_password, autocomplete: "current-password", class:"form-control" %>
       </div>
-
+      <br/>
       <div class="actions center">
         <%= f.submit "Update", class:"btn btn-update" %>
         <%= link_to "Back", :back, class:"btn btn-cancel"%>
@@ -43,7 +43,5 @@
     <div class="actions center">
       <%= button_to "Delete Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-x-account" %></p>
     </div
-
-
   </div>
 </div>
