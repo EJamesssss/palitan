@@ -6,25 +6,45 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <% if user_signed_in? %>
+                <% if user_signed_in? && current_user.admin%>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#">Transaction History</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link">|</a>
+                        <a class="nav-link"></a>
                     </li> 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#">Portfolio</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link">|</a>
+                        <a class="nav-link"></a>
                     </li> 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#">List of Users</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"></a>
+                    </li> 
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Unapproved User</a>
+                    </li>
+                <% else %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Transaction History</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"></a>
+                    </li> 
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Portfolio</a>
                     </li>
                 <% end %>
             </ul>
@@ -38,16 +58,9 @@
                                 Hi, <%= current_user.email %>
                             </a>
                             <div class="dropdown-content">
-                                <%= link_to 'Edit Profile', edit_user_registration_path, class:"nav-link" %>
+                                <%= link_to ' Edit Profile', edit_user_registration_path, class:"nav-link bi-pencil-square" %>
+                                <%= link_to " Sign Out", destroy_user_session_path, method: :delete, class:"nav-link bi-box-arrow-right" %>
                             </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link">|</a>
-                        </li> 
-
-                        <li class="nav-item">
-                            <%= link_to " SIGN OUT", destroy_user_session_path, method: :delete, class:"nav-link bi-box-arrow-right" %>
                         </li>
                     <% end %>
                 </ul>
