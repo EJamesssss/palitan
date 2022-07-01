@@ -1,0 +1,21 @@
+<h1>List of users</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>EMAIL</th>
+            <th>ROLE</th>
+            <th>STATUS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @unapproved.each do |waiting|%>
+            <tr>
+                <td><%= waiting.email%></td>
+                <td><%= waiting.admin === true ? "Admin" : "Trader"%></td>
+                <td><%= waiting.approved === false ? "Pending" : "Approved"%></td>
+                <td><%= link_to "Approve", destroy_user_session_path, method: :delete %></td>
+            </tr>
+        <%end%>
+    </tbody>
+</table>
