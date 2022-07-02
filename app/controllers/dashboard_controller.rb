@@ -15,6 +15,9 @@ class DashboardController < ApplicationController
   end
 
   def update
+  end
+
+  def approved
     @unapproved = User.find(params[:id])
     if @unapproved.update_attribute(:approved, true)
       UnapprovedMailer.with(user: @unapproved).user_approved.deliver_later
