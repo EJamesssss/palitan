@@ -184,5 +184,14 @@ a {
 .add-users {
   font-size: 20px;
   font-weight: bold;
-  margin-top: 5px;
+  margin-top: 5px;}
+
+.box {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.card-body {
+  margin: 2rem;
 }
