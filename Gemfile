@@ -55,3 +55,4 @@ gem 'net-smtp', require: false
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'net-pop', require: false
 gem 'net-imap', require: false
+gem 'iex-ruby-client'
