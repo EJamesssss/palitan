@@ -17,7 +17,10 @@ class DashboardController < ApplicationController
   def update
     @unapproved = User.find(params[:id])
     if @unapproved.update_attribute(:approved, true)
+      UnapprovedMailer.with(user: @unapproved).user_approved.deliver_later
       redirect_to dashboard_path, notice: "User information has been updated"
+    else
+      redirect_to pending_users_path, notice: "Approval of user failed!"
     end
   end
 
