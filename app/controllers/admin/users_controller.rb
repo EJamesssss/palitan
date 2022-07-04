@@ -18,7 +18,10 @@ class Admin::UsersController < ApplicationController
         @user = User.create(user_params)
 
         if @user.save
-            redirect_to dashboard_index_path
+            redirect_to admin_users_path
+            if @user.approved = true
+                UnapprovedMailer.with(user: @user).user_approved.deliver_later
+            end
         else
             render :new
         end
@@ -32,7 +35,7 @@ class Admin::UsersController < ApplicationController
         @unapproved = User.find(params[:id])
         if @unapproved.update_attribute(:approved, true)
           UnapprovedMailer.with(user: @unapproved).user_approved.deliver_later
-          redirect_to dashboard_path, notice: "User information has been updated"
+          redirect_to admin_users_path, notice: "User information has been updated"
         else
           redirect_to pending_users_path, notice: "Approval of user failed!"
         end
