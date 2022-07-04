@@ -9,12 +9,36 @@ class DashboardController < ApplicationController
     @registered_users = User.find(params[:id])
   end
 
+  def new
+    @user = User.new
+  end
 
-  def pending_users
-    @unapproved = User.where("approved = ?", false)
+  def create
+    @user = User.create(user_params)
+
+    if @user.save
+        redirect_to dashboard_index_path
+    else
+        render :new
+    end
+  end
+
+  def edit
   end
 
   def update
+    # if @trader.update(trader_params)
+    #   # User.send_approved_email(params[:email])
+    #   send_approved_email(@trader)
+    #   redirect_to admin_user_path(@trader)
+    # else
+    #     render :edit
+    # end
+  end
+
+
+  def pending_users
+    @unapproved = User.where("approved = ?", false)
   end
 
   def approved
@@ -32,6 +56,10 @@ class DashboardController < ApplicationController
     unless current_user.admin?
       redirect_to home_index_path, notice: "Restricted"
     end
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :admin, :approved)
   end
 
 end
