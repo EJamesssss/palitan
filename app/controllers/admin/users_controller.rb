@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
     before_action :must_be_admin
-    before_action :set_user, only: [:show, :edit, :update]
+    before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     def index
         @users = User.all
@@ -19,7 +19,7 @@ class Admin::UsersController < ApplicationController
 
     def update
         if @users.update(user_params)
-            redirect_to admin_user_path, notice: "Update successful"
+            redirect_to admin_users_path, notice: "Update successful"
         else
             render :edit, notice: "Update failed"
         end
@@ -51,6 +51,11 @@ class Admin::UsersController < ApplicationController
         else
           redirect_to pending_users_path, notice: "Approval of user failed!"
         end
+    end
+
+    def destroy
+        @users.destroy
+        redirect_to admin_users_path, notice: "Deleted #{@users.email}"
     end
 
     private
