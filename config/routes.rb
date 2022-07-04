@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get '/dashboard/pending_users', to: 'dashboard#pending_users', as: 'pending_users'
-  patch '/dashboard/:id', to: 'dashboard#approved', as: 'confirm_user'
-  resources :dashboard
+  get '/admin/users/pending_users', to: 'admin/users#pending_users', as: 'pending_users'
+  patch '/admin/users/:id', to: 'admin/users#approved', as: 'confirm_user'
+  resources :dashboard, only: [:index]
   resources :home, only: [:index]
   devise_scope :user do
     root to: "devise/sessions#new"
