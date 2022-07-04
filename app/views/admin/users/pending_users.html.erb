@@ -11,12 +11,14 @@
         </thead>
         <tbody>
             <% @unapproved.each do |waiting|%>
-                <tr>
-                    <td><%= waiting.email%></td>
-                    <td><%= waiting.admin === true ? "Admin" : "Trader"%></td>
-                    <td><%= waiting.approved === false ? "Pending" : "Approved"%></td>
-                    <td><%= link_to "Approve User", confirm_user_path(:id => waiting.id, "waiting[approved]" => true), :method => :patch, class: "btn btn-show bi-check-lg" %></td>
-                </tr>
+                <%if waiting.confirmed?%>
+                    <tr>
+                        <td><%= waiting.email%></td>
+                        <td><%= waiting.admin === true ? "Admin" : "Trader"%></td>
+                        <td><%= waiting.approved === false ? "Pending" : "Approved"%></td>
+                        <td><%= link_to "Approve User", confirm_user_path(:id => waiting.id, "waiting[approved]" => true), :method => :patch, class: "btn btn-show bi-check-lg" %></td>
+                    </tr>
+                <%end%>
             <%end%>
         </tbody>
     </table>

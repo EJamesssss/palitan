@@ -1,27 +1,39 @@
 class Admin::UsersController < ApplicationController
     before_action :must_be_admin
+    before_action :set_user, only: [:show, :edit, :update]
 
     def index
-        @registered_users = User.all
+        @users = User.all
     end
 
     def show
-        @registered_users = User.find(params[:id])
     end
 
 
     def new 
         @user = User.new
     end
+
+    def edit
+    end
+
+    def update
+        if @users.update(user_params)
+            redirect_to admin_user_path, notice: "Update successful"
+        else
+            render :edit, notice: "Update failed"
+        end
+    end
     
     def create
         @user = User.create(user_params)
+        @approved = @user.approved
 
         if @user.save
-            redirect_to admin_users_path
-            if @user.approved = true
+            if @approved
                 UnapprovedMailer.with(user: @user).user_approved.deliver_later
             end
+            redirect_to admin_users_path, notice: "Successfully created #{@user.email}"
         else
             render :new
         end
@@ -46,6 +58,10 @@ class Admin::UsersController < ApplicationController
       unless current_user.admin?
         redirect_to home_index_path, notice: "Restricted"
       end
+    end
+
+    def set_user
+        @users = User.find(params[:id])
     end
   
     def user_params
