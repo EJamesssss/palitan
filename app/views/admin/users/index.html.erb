@@ -4,8 +4,7 @@
       <div class="card-body-categ">
         <h2>List of Users</h2>
         <div class="add-users">
-          <!-- <a class="nav-link bi-plus-square" href="#"> Add User</a> -->
-          <%= link_to 'Add User', new_admin_user_path, class: "nav-link bi-plus-square"%>
+          <%= link_to ' Add User', new_admin_user_path, class: "nav-link bi-plus-square"%>
         </div>
       </div>
     </div>
@@ -17,19 +16,21 @@
     <thead>
       <tr>
         <th>EMAIL</th>
+        <th>ACCOUNT</th>
         <th>ROLE</th>
         <th>STATUS</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <% @registered_users.each do |user|%>
+      <% @users.each do |user|%>
         <tr>
           <td><%= user.email%></td>
-          <td><%= user.confirmed?%></td>
+          <td><%= user.confirmed? ? "Confirmed" : "Not Confirmed"%></td>
           <td><%= user.admin === true ? "Admin" : "Trader"%></td>
           <td><%= user.approved === false ? "Pending" : "Approved"%></td>
-          <td><%= link_to ' Show', admin_users_path(user), class: "btn btn-show bi-eye-fill" %></td>
+          <td><%= link_to ' Show', admin_user_path(user), class: "btn btn-show bi-eye-fill" %></td>
+          <td><%= link_to ' Edit', edit_admin_user_path(user), class: "btn btn-show bi-pencil-fill" %></td>
         </tr>
       <%end%>
     </tbody>
