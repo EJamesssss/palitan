@@ -1,6 +1,15 @@
 class Admin::UsersController < ApplicationController
     before_action :must_be_admin
 
+    def index
+        @registered_users = User.all
+    end
+
+    def show
+        @registered_users = User.find(params[:id])
+    end
+
+
     def new 
         @user = User.new
     end
@@ -12,6 +21,20 @@ class Admin::UsersController < ApplicationController
             redirect_to dashboard_index_path
         else
             render :new
+        end
+    end
+
+    def pending_users
+        @unapproved = User.where("approved = ?", false)
+    end
+    
+    def approved
+        @unapproved = User.find(params[:id])
+        if @unapproved.update_attribute(:approved, true)
+          UnapprovedMailer.with(user: @unapproved).user_approved.deliver_later
+          redirect_to dashboard_path, notice: "User information has been updated"
+        else
+          redirect_to pending_users_path, notice: "Approval of user failed!"
         end
     end
 
