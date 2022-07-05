@@ -23,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @user.each do |user|%>
+      <% @users.each do |user|%>
         <tr>
           <td><%= user.email%></td>
           <td><%= user.confirmed? ? "Confirmed" : "Not Confirmed"%></td>
