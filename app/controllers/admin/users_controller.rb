@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     def index
-        @users = User.all
+        @user = User.all
     end
 
     def show
@@ -14,16 +14,6 @@ class Admin::UsersController < ApplicationController
         @user = User.new
     end
 
-    def edit
-    end
-
-    def update
-        if @users.update(user_params)
-            redirect_to admin_users_path, notice: "Update successful"
-        else
-            render :edit, notice: "Update failed"
-        end
-    end
     
     def create
         @user = User.create(user_params)
@@ -36,6 +26,17 @@ class Admin::UsersController < ApplicationController
             redirect_to admin_users_path, notice: "Successfully created #{@user.email}"
         else
             render :new
+        end
+    end
+
+    def edit
+    end
+
+    def update
+        if @user.update(user_params)
+            redirect_to admin_users_path, notice: "Update successful"
+        else
+            render :edit
         end
     end
 
@@ -54,8 +55,8 @@ class Admin::UsersController < ApplicationController
     end
 
     def destroy
-        @users.destroy
-        redirect_to admin_users_path, notice: "Deleted #{@users.email}"
+        @user.destroy
+        redirect_to admin_users_path, notice: "Deleted #{@user.email}"
     end
 
     private
@@ -66,7 +67,7 @@ class Admin::UsersController < ApplicationController
     end
 
     def set_user
-        @users = User.find(params[:id])
+        @user = User.find(params[:id])
     end
   
     def user_params
