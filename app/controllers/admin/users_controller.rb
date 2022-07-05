@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     def index
-        @user = User.all
+        @users = User.all
     end
 
     def show
@@ -33,7 +33,8 @@ class Admin::UsersController < ApplicationController
     end
 
     def update
-        if @user.update(user_params)
+        with_password = params[:user][:password].blank? ? "update_without_password" : "update"
+        if @user.send(with_password, user_params)
             redirect_to admin_users_path, notice: "Update successful"
         else
             render :edit
