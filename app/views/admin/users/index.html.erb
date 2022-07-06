@@ -29,9 +29,11 @@
           <td><%= user.confirmed? ? "Confirmed" : "Not Confirmed"%></td>
           <td><%= user.admin === true ? "Admin" : "Trader"%></td>
           <td><%= user.approved === false ? "Pending" : "Approved"%></td>
-          <td><%= link_to ' Show', admin_user_path(user), class: "btn btn-show bi-eye-fill" %></td>
-          <td><%= link_to ' Edit', edit_admin_user_path(user), class: "btn btn-show bi-pencil-fill" %></td>
-          <td><%= link_to ' Delete', admin_user_path(user), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-show bi-trash3-fill" %></td>
+          <td class="center">
+            <%= link_to ' Show', admin_user_path(user), class: "btn btn-show bi-eye-fill" %>
+            <%= link_to ' Edit', edit_admin_user_path(user), class: "btn btn-show bi-pencil-fill" %>
+            <%= link_to ' Delete', admin_user_path(user), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-show bi-trash3-fill" %>
+          </td>
         </tr>
       <%end%>
     </tbody>
