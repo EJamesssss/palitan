@@ -1,19 +1,33 @@
-<%= form_with model: @transactions do |form| %>
+<div class="box"> 
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>BUYING</h3>
+    </div>
+    <div class="card-body">
+      <%= form_with model: @transactions do |form| %>
+        <div class="mb-3">
+          <%= form.label "Symbol" %>
+          <%= form.text_field :logo, value: @company.symbol, readonly: true, class: "form-control" %>
+        </div>
 
-  <div>
-    <%= form.label "Company Name" %>
-    <%= form.text_field :company, value: @company.company_name, readonly: true %>
+        <div class="mb-3">
+          <%= form.label "Company Name" %>
+          <%= form.text_field :company, value: @company.company_name, readonly: true, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label "Price:" %>
+          <%= form.text_field :amount, value: @price.latest_price, readonly: true, class: "form-control" %>
+        </div>
+
+        <div>
+          <%= form.submit "BUY", class: "btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+    <div  class="card-footer text-center">
+      <%= link_to ' New Symbol', trader_transactions_path, class: "bi-arrow-left-short space pad" %>
+      <%= link_to ' Back to Portfolio', portfolio_index_path, class: " bi-arrow-left-short space pad" %>
+    </div>
   </div>
-
-  <div>
-    <%= form.label "Price:" %>
-    <%= form.text_field :amount, value: @price.latest_price, readonly: true %>
-  </div>
-
-
-
-  <div>
-    <%= form.submit %>
-  </div>
-
-<% end %>
+</div>

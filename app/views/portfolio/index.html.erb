@@ -4,7 +4,7 @@
       <div class="card-body-categ">
         <h2>My Portfolio</h2>
         <div class="add-users">
-          <%= link_to ' Add Portfolio', new_portfolio_path, class: "nav-link bi-plus-square"%>
+          <%= link_to ' Add Portfolio', new_trader_transaction_path, class: "nav-link bi-plus-square"%>
         </div>
       </div>
     </div>
@@ -18,21 +18,31 @@
         <th>SYMBOL</th>
         <th>COMPANY NAME</th>
         <th>QTY</th>
-        <th>COST PRICE (₱)</th>
+        <th>COST PRICE</th>
         <th>TOTAL</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
+      <% if @portfolios.count == 0 %>
+      <tr>
+        <td><i> No data available in table </i></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <% end %>
       <% @portfolios.each do |portfolio|%>
         <tr>
           <td><%= portfolio.symbol%></td>
           <td><%= portfolio.company_name%></td>
           <td><%= portfolio.shares%></td>
-          <td><%= portfolio.cost_price%></td>
-          <td><%= portfolio.total%></td>
+          <td>₱ <%= portfolio.cost_price%></td>
+          <td>₱ <%= portfolio.total%></td>
           <td class="center">
-            <a class="btn btn-show bi-bag"> BUY</a>
+            <%= link_to ' BUY', trader_transactions_path, class: "btn btn-show bi-bag" %>
             <a class="btn btn-show bi-coin"> SELL</a>
           </td>
         </tr>
