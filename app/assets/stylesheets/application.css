@@ -189,9 +189,23 @@ a {
 .box {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
-}
+  margin-top: 2rem;}
 
 .card-body {
-  margin: 2rem;
-}
+  margin: 2rem;}
+
+.btn-success {
+  width: 22rem;
+  background-color: #ffecb5;
+  color: #000;}
+
+.btn-success:hover {
+  width: 22rem;
+  background-color: #ffdf80;
+  color: #000;}
+
+.pad {
+  padding: 1rem}
+
+.wdth{
+  width: 20rem}

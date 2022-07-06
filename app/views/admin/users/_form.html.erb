@@ -1,29 +1,35 @@
-<%= form_with model: [:admin, user] do |form| %>
+<div class="box"> 
+  <div class="card">
+    <%= form_with model: [:admin, user] do |form| %>
+      <div class="card-header text-center">
+        <h3>Update User</h3>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <%= form.label "Email" %>
+          <br>
+          <%= form.email_field :email, class: "form-control wdth" %>
+        </div>
 
-  <div>
-    <%= form.label "Email" %>
-    <br>
-    <%= form.email_field :email %>
+        <div class="mb-3">
+          <%= form.label "Password" %>
+          <br>
+          <%= form.password_field :password, class: "form-control wdth"%>
+        </div>
+
+        <div class="mb-3">
+          <%= form.check_box :admin %> 
+          <%= form.label :admin %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.check_box :approved %> 
+          <%= form.label :approved %>
+        </div>       
+      </div>
+      <div  class="card-footer text-center">
+        <%= form.submit class: "btn btn-show"%>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label "Password" %>
-    <br>
-    <%= form.password_field :password %>
-  </div>
-
-  <div>
-    <%= form.check_box :admin %> 
-    <%= form.label :admin %>
-  </div>
-
-  <div>
-    <%= form.check_box :approved %> 
-    <%= form.label :approved %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-
-<% end %>
+</div>
