@@ -33,8 +33,8 @@ class Admin::UsersController < ApplicationController
     end
 
     def update
-        @user = User.find(params[:id])
-        if @user.update(user_params)
+        with_password = params[:user][:password].blank? ? "update_without_password" : "update"
+        if @user.send(with_password, user_params)
             redirect_to admin_users_path, notice: "Update successful"
         else
             render :edit
