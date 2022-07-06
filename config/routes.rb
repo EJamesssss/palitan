@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     resources :users
   end
 
-
   resources :dashboard, only: [:index]
   resources :home, only: [:index]
   devise_scope :user do
