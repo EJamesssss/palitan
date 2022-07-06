@@ -21,13 +21,19 @@
         </div>
 
         <div>
-          <%= form.submit "BUY", class: "btn btn-success" %>
+          <% if current_user.approved? %>
+            <%= form.submit "BUY", class: "btn btn-success" %>
+          <% end %>
         </div>
       <% end %>
     </div>
     <div  class="card-footer text-center">
-      <%= link_to ' New Symbol', trader_transactions_path, class: "bi-arrow-left-short space pad" %>
-      <%= link_to ' Back to Portfolio', portfolio_index_path, class: " bi-arrow-left-short space pad" %>
+      <% if current_user.approved? %>
+        <%= link_to ' New Symbol', home_index_path, class: "bi-arrow-left-short space pad" %>
+        <%= link_to ' Back to Portfolio', portfolio_index_path, class: " bi-arrow-left-short space pad" %>
+      <% else %>
+        <%= link_to ' New Symbol', home_index_path, class: "bi-arrow-left-short space pad" %>
+      <% end %>
     </div>
   </div>
 </div>
