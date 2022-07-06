@@ -4,7 +4,7 @@
       <div class="card-body-categ">
         <h2>My Portfolio</h2>
         <div class="add-users">
-          <%= link_to ' Add Portfolio', new_trader_transaction_path, class: "nav-link bi-plus-square"%>
+          <%= link_to ' Add Portfolio', home_index_path, class: "nav-link bi-plus-square"%>
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@
           <td>₱ <%= portfolio.cost_price%></td>
           <td>₱ <%= portfolio.total%></td>
           <td class="center">
-            <%= link_to ' BUY', trader_transactions_path, class: "btn btn-show bi-bag" %>
+            <%= link_to ' BUY', home_index_path, class: "btn btn-show bi-bag" %>
             <a class="btn btn-show bi-coin"> SELL</a>
           </td>
         </tr>
