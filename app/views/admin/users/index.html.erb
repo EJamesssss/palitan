@@ -25,10 +25,10 @@
     <tbody>
       <% @users.each do |user|%>
         <tr>
-          <td><%= user.email%></td>
-          <td><%= user.confirmed? ? "Confirmed" : "Not Confirmed"%></td>
-          <td><%= user.admin === true ? "Admin" : "Trader"%></td>
-          <td><%= user.approved === false ? "Pending" : "Approved"%></td>
+          <td><%= users.email%></td>
+          <td><%= users.confirmed? ? "Confirmed" : "Not Confirmed"%></td>
+          <td><%= users.admin === true ? "Admin" : "Trader"%></td>
+          <td><%= users.approved === false ? "Pending" : "Approved"%></td>
           <td><%= link_to ' Show', admin_user_path(user), class: "btn btn-show bi-eye-fill" %></td>
           <td><%= link_to ' Edit', edit_admin_user_path(user), class: "btn btn-show bi-pencil-fill" %></td>
           <td><%= link_to ' Delete', admin_user_path(user), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-show bi-trash3-fill" %></td>
