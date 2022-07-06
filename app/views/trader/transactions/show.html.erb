@@ -1,0 +1,19 @@
+<%= form_with model: @transactions do |form| %>
+
+  <div>
+    <%= form.label "Company Name" %>
+    <%= form.text_field :company, value: @company.company_name, readonly: true %>
+  </div>
+
+  <div>
+    <%= form.label "Price:" %>
+    <%= form.text_field :amount, value: @price.latest_price, readonly: true %>
+  </div>
+
+
+
+  <div>
+    <%= form.submit %>
+  </div>
+
+<% end %>
