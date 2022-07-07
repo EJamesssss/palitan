@@ -1,0 +1,60 @@
+<div class="box"> 
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>STOCK INFORMATION</h3>
+    </div>
+    <div class="card-body">
+      <%= form_with model: @transaction, url: trader_transactions_path, method: :post do |form| %>
+
+        <div class="mb-3">
+          <%= form.label "User Id" %>
+          <%= form.text_field :user_id, value: current_user.id, readonly: true, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label "Symbol" %>
+          <%= form.text_field :symbol, value: @company.symbol, readonly: true, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label "Company Name" %>
+          <%= form.text_field :company_name, value: @company.company_name, readonly: true, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label "Price:" %>
+          <%= form.text_field :cost_price, value: @price.latest_price, readonly: true, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label "Shares:" %>
+          <%= form.number_field :shares, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+            <%= form.label "Total:" %>
+            <%= form.number_field :total, value: 0, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+            <%= form.label "Transaction Type:" %>
+            <%= form.text_field :transaction_type, value: 'BUY', class: "form-control" %>
+        </div>
+
+        <div>
+          <% if current_user.approved? %>
+            <%= form.submit "BUY", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div  class="card-footer text-center">
+      <% if current_user.approved? %>
+        <%= link_to ' New Symbol', home_index_path, class: "bi-arrow-left-short space pad" %>
+        <%= link_to ' Back to Portfolio', portfolio_index_path, class: " bi-arrow-left-short space pad" %>
+      <% else %>
+        <%= link_to ' New Symbol', home_index_path, class: "bi-arrow-left-short space pad" %>
+      <% end %>
+    </div>
+  </div>
+</div>

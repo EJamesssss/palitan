@@ -1,16 +1,18 @@
 Rails.application.routes.draw do
   namespace :trader do
-    resources :transactions, only: [:index, :show, :new, :create]
-    
+    resources :transactions, only: [:index, :show, :new, :create] 
   end
+
   get '/admin/users/pending_users', to: 'admin/users#pending_users', as: 'pending_users'
   patch '/admin/users/approve/:id', to: 'admin/users#approved', as: 'confirm_user'
+  
   namespace :admin do
     resources :users
   end
 
   resources :dashboard, only: [:index]
   resources :home, only: [:index]
+  
   devise_scope :user do
     root to: "devise/sessions#new"
   end
