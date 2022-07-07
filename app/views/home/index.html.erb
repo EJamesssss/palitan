@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
       <p>Enter the symbol of the stock you're interested in.</p>
-      <%= form_with url: 'trader/transactions/new', method: :get do |form| %>
+      <%= form_with url: new_transaction_path, method: :get do |form| %>
         <div class="mb-3">
           <%= form.text_field :symbol, class: "form-control", placeholder: "ex: MSFT, AMZN, GOOGL"%>
         </div>

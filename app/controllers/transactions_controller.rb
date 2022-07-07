@@ -1,25 +1,23 @@
-class Trader::TransactionsController < ApplicationController
+class TransactionsController < ApplicationController
   before_action :initialize_iex_client
 
   def index
+    @transactions =  current_user.transactions
   end
 
-  def show
-
-  end
 
   def new
-    @price = @client.quote(params[:symbol])
-    @company = @client.company(params[:symbol])
-    @logo = @client.logo(params[:symbol])
+    @symbol = params[:symbol]
+    @price = @client.quote(@symbol)
+    @company = @client.company(@symbol)
+    @logo = @client.logo(@symbol)
     @transaction = current_user.transactions.build
   end
 
   def create
     @transaction = current_user.transactions.build(transaction_params)
-    byebug
     if @transaction.save
-      redirect_to portfolio_index_path
+      redirect_to portfolio_index_path, noteice: "Asset added to portfolio!"
     else
       render :new
     end
