@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   namespace :trader do
-    post '/transactions/:id', to: 'transactions#show', as: 'symbol_search'
     resources :transactions, only: [:index, :show, :new, :create]
     
   end
