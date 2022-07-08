@@ -2,7 +2,7 @@ class TransactionsController < ApplicationController
   before_action :initialize_iex_client
 
   def index
-    @transactions =  current_user.transactions
+    @transactions =  current_user.transactions.order("created_at DESC")
   end
 
 
@@ -32,16 +32,21 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_params
-    params.require(:transaction).permit(:user_id, :symbol, :company_name, :shares, :cost_price, :total, :transaction_type)
+    params.require(:transaction).permit(:user_id, :symbol, :company_name, :shares, :cost_price, :transaction_type)
   end
 
   def update_portfolio
     @user_portfolio = current_user.portfolios.find_by(symbol: @transaction.symbol)
     if @user_portfolio
-      @update_stocks = @user_portfolio.shares + @transaction.shares
-      @user_portfolio.update_attribute(:shares, @update_stocks)
+      if @transaction.transaction_type == "BUY"
+        @update_stocks = @user_portfolio.shares + @transaction.shares
+        @user_portfolio.update_attribute(:shares, @update_stocks)
+      else
+        @update_stocks = @user_portfolio.shares - @transaction.shares
+        @user_portfolio.update_attribute(:shares, @update_stocks)
+      end
     else
-      @portfolio = current_user.portfolios.build(params.require(:transaction).permit(:user_id, :symbol, :company_name, :shares, :cost_price, :total))
+      @portfolio = current_user.portfolios.build(params.require(:transaction).permit(:user_id, :symbol, :company_name, :shares, :cost_price))
       @portfolio.save
     end
 

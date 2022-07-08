@@ -28,22 +28,20 @@
   
           <div class="mb-3">
             <%= form.label "Shares:" %>
-            <%= form.number_field :shares, class: "form-control" %>
+            <%= form.number_field :shares, value: 1,min: 1, class: "form-control" %>
           </div>
   
-          <div class="mb-3">
-              <%= form.label "Total:" %>
-              <%= form.number_field :total, value: 0, class: "form-control" %>
-          </div>
+
   
           <div class="mb-3">
               <%= form.label "Transaction Type:" %>
-              <%= form.text_field :transaction_type, value: 'BUY', class: "form-control" %>
+              <!-- <%= form.text_field :transaction_type, value: 'BUY', class: "form-control" %> -->
+              <%= form.select :transaction_type, [['BUY','BUY'],['SELL','SELL']] %>
           </div>
   
           <div>
             <% if current_user.approved? %>
-              <%= form.submit "BUY", class: "btn btn-success" %>
+              <%= form.submit "CONFIRM", class: "btn btn-success" %>
             <% end %>
           </div>
         <% end %>

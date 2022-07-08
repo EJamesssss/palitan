@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :dashboard, only: [:index]
   resources :home, only: [:index]
   resources :transactions , only: [:index, :new, :create]
+  resources :sell_stocks
   
   devise_scope :user do
     root to: "devise/sessions#new"

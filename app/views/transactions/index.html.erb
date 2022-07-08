@@ -19,9 +19,9 @@
         <th>SYMBOL</th>
         <th>COMPANY NAME</th>
         <th>QTY</th>
-        <th>COST PRICE</th>
-        <th>TOTAL</th>
-        <th></th>
+        <th>PRICE PER SHARE</th>
+        <th>TRANSACTION TYPE</th>
+        <th>TRANSACTION DATE</th>
       </tr>
     </thead>
     <tbody>
@@ -42,11 +42,8 @@
           <td><%= transaction.company_name%></td>
           <td><%= transaction.shares%></td>
           <td>₱ <%= transaction.cost_price%></td>
-          <td>₱ <%= transaction.total%></td>
-          <td class="center">
-            <%= link_to ' BUY', home_index_path, class: "btn btn-show bi-bag" %>
-            <a class="btn btn-show bi-coin"> SELL</a>
-          </td>
+          <td><%= transaction.transaction_type%></td>
+          <td><%= transaction.created_at.strftime('%B %e %Y at %l:%M %p')%></td>
         </tr>
       <% end %>
     </tbody>
