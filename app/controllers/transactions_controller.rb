@@ -18,7 +18,7 @@ class TransactionsController < ApplicationController
     @transaction = current_user.transactions.build(transaction_params)
     if @transaction.save
       update_portfolio
-      redirect_to portfolio_index_path, noteice: "Asset added to portfolio!"
+      redirect_to portfolio_index_path, notice: "Asset added to portfolio!"
     else
       render :new
     end

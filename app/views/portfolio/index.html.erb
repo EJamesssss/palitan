@@ -35,17 +35,19 @@
       </tr>
       <% end %>
       <% @portfolios.each do |portfolio|%>
-        <tr>
-          <td><%= portfolio.symbol%></td>
-          <td><%= portfolio.company_name%></td>
-          <td><%= portfolio.shares%></td>
-          <td>₱ <%= portfolio.cost_price%></td>
-          <td>₱ <%= portfolio.shares * portfolio.cost_price%></td>
-          <td class="center">
-            <%= link_to ' BUY', home_index_path, class: "btn btn-show bi-bag" %>
-            <a class="btn btn-show bi-coin"> SELL</a>
-          </td>
-        </tr>
+        <%if portfolio.shares > 0 %>
+          <tr>
+            <td><%= portfolio.symbol%></td>
+            <td><%= portfolio.company_name%></td>
+            <td><%= portfolio.shares%></td>
+            <td>₱ <%= portfolio.cost_price%></td>
+            <td>₱ <%= portfolio.shares * portfolio.cost_price%></td>
+            <td class="center">
+              <%= link_to ' BUY', home_index_path, class: "btn btn-show bi-bag" %>
+              <a class="btn btn-show bi-coin"> SELL</a>
+            </td>
+          </tr>
+          <%end%>
       <% end %>
     </tbody>
   </table>
