@@ -40,7 +40,7 @@
           <td><%= portfolio.company_name%></td>
           <td><%= portfolio.shares%></td>
           <td>₱ <%= portfolio.cost_price%></td>
-          <td>₱ <%= portfolio.total%></td>
+          <td>₱ <%= portfolio.shares * portfolio.cost_price%></td>
           <td class="center">
             <%= link_to ' BUY', home_index_path, class: "btn btn-show bi-bag" %>
             <a class="btn btn-show bi-coin"> SELL</a>
