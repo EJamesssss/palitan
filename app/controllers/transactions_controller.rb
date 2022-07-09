@@ -2,6 +2,7 @@ class TransactionsController < ApplicationController
   before_action :initialize_iex_client
 
   def index
+    @logs = Transaction.all.order("created_at DESC")
     @transactions =  current_user.transactions.order("created_at DESC")
   end
 
