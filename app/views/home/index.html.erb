@@ -7,7 +7,7 @@
       <p>Enter the symbol of the stock you're interested in.</p>
       <%= form_with url: new_transaction_path, method: :get do |form| %>
         <div class="mb-3">
-          <%= form.text_field :symbol, class: "form-control", placeholder: "ex: MSFT, AMZN, GOOGL"%>
+          <%= form.text_field :symbol, :required => true, class: "form-control", placeholder: "ex: MSFT, AMZN, GOOGL"%>
         </div>
 
         <div>
