@@ -25,10 +25,17 @@
             <%= form.label "Price:" %>
             <%= form.text_field :cost_price, value: @price.latest_price, readonly: true, class: "form-control" %>
           </div>
-  
+
           <div class="mb-3">
-            <%= form.label "Shares:" %>
-            <%= form.number_field :shares, value: 1,min: 1, class: "form-control" %>
+            <%if @user_shares.to_i >= 1%>
+              <%= form.label "Shares: (max shares to sell: #{@user_shares.to_i})" %>
+              <%= form.number_field :shares, value: 1,min: 1,max: @user_shares.to_i, class: "form-control" %>
+  
+            <%else%>
+              <%= form.label "Shares:" %>
+              <%= form.number_field :shares, value: 1,min: 1, class: "form-control" %>
+  
+            <%end%>
           </div>
   
 
@@ -38,9 +45,14 @@
 
               <%= form.radio_button :transaction_type, 'BUY', :checked => true %> 
               <%= form.label 'BUY', class: "pad3" %>
+
+              <%if @user_shares.to_i >= 1%>
               
               <%= form.radio_button :transaction_type, 'SELL' %>
               <%= form.label 'SELL' %>
+
+              <%end%>
+
           </div>
   
           <div>
