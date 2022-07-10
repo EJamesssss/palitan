@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_02_030903) do
+
+ActiveRecord::Schema.define(version: 2022_07_09_023650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +22,6 @@ ActiveRecord::Schema.define(version: 2022_07_02_030903) do
     t.string "company_name"
     t.float "shares"
     t.float "cost_price"
-    t.float "total"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_portfolios_on_user_id"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 2022_07_02_030903) do
     t.string "company_name"
     t.float "shares"
     t.float "cost_price"
-    t.float "total"
     t.string "transaction_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

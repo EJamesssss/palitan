@@ -34,9 +34,13 @@
 
   
           <div class="mb-3">
-              <%= form.label "Transaction Type:" %>
-              <!-- <%= form.text_field :transaction_type, value: 'BUY', class: "form-control" %> -->
-              <%= form.select :transaction_type, [['BUY','BUY'],['SELL','SELL']] %>
+              <%= form.label "Transaction Type:", class: "pad2" %>
+
+              <%= form.radio_button :transaction_type, 'BUY', :checked => true %> 
+              <%= form.label 'BUY', class: "pad3" %>
+              
+              <%= form.radio_button :transaction_type, 'SELL' %>
+              <%= form.label 'SELL' %>
           </div>
   
           <div>

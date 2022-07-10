@@ -207,5 +207,16 @@ a {
 .pad {
   padding: 1rem}
 
+.pad2 {
+  padding: 0 2rem 0 0}
+
+.pad3 {
+  padding: 0 1rem 0 0}
+
 .wdth{
   width: 20rem}
+
+tfoot {
+  border-color: #354152;
+
+}
