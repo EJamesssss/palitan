@@ -12,6 +12,12 @@ class TransactionsController < ApplicationController
     @price = @client.quote(@symbol)
     @company = @client.company(@symbol)
     @logo = @client.logo(@symbol)
+    @portfolio = current_user.portfolios.find_by(symbol: @symbol)
+    if @portfolio == nil
+      @user_shares = 0
+    else
+      @user_shares = @portfolio.shares
+    end
     @transaction = current_user.transactions.build
   end
 
