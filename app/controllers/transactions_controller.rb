@@ -13,7 +13,7 @@ class TransactionsController < ApplicationController
     @price = @client.quote(@symbol)
     @company = @client.company(@symbol)
     @logo = @client.logo(@symbol)
-    @wallets = current_user.userwallets
+    @wallets = current_user.userwallets.find_by(user_id: current_user)
     @portfolio = current_user.portfolios.find_by(symbol: @symbol)
     if @portfolio == nil
       @user_shares = 0
@@ -27,7 +27,8 @@ class TransactionsController < ApplicationController
     @transaction = current_user.transactions.build(transaction_params)
     if @transaction.save
       update_portfolio
-      redirect_to portfolio_index_path, notice: "Asset added to portfolio!"
+      update_wallet
+      redirect_to portfolio_index_path, notice: "Portfolio updated!"
     else
       render :new
     end
@@ -59,6 +60,18 @@ class TransactionsController < ApplicationController
       @portfolio.save
     end
 
+  end
+
+  def update_wallet
+    @user_wallet = current_user.userwallets.find_by(user_id: current_user)
+    @transaction_total = @transaction.shares * @transaction.cost_price
+    if @transaction.transaction_type == "BUY"
+      @deduct_wallet = @user_wallet.amount - @transaction_total
+      @user_wallet.update_attribute(:amount, @deduct_wallet)
+    else
+      @add_wallet = @user_wallet.amount + @transaction_total
+      @user_wallet.update_attribute(:amount, @add_wallet)
+    end
   end
 
 
