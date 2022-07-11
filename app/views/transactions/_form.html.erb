@@ -7,11 +7,6 @@
         <%= form_with model: transaction do |form| %>
   
           <div class="mb-3">
-            <%= form.label "User Id" %>
-            <%= form.hidden_field :user_id, value: current_user.id, readonly: true, class: "form-control" %>
-          </div>
-  
-          <div class="mb-3">
             <%= form.label "Symbol" %>
             <%= form.text_field :symbol, value: @symbol, readonly: true, class: "form-control" %>
           </div>

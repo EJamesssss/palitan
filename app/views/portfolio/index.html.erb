@@ -12,7 +12,7 @@
 </div>
 
 <div class="table-box"> 
-  <table class="table table-striped table-hover">
+  <table id="table" class="table table-striped table-hover">
     <thead>
       <tr>
         <th>SYMBOL</th>
@@ -44,7 +44,7 @@
             <td>₱ <%= portfolio.shares * portfolio.cost_price%></td>
             <td class="center">
               <%= link_to ' BUY', home_index_path, class: "btn btn-show bi-bag" %>
-              <a class="btn btn-show bi-coin"> SELL</a>
+              <%= link_to ' SELL', home_index_path, class: "btn btn-show bi-coin" %>
             </td>
           </tr>
         <%end%>
