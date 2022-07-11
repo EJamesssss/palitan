@@ -1,0 +1,26 @@
+<%= form_with(model: userwallet) do |form| %>
+  <% if userwallet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(userwallet.errors.count, "error") %> prohibited this userwallet from being saved:</h2>
+
+      <ul>
+        <% userwallet.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
