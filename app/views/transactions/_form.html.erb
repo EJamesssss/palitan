@@ -38,7 +38,7 @@
           <div class="mb-3">
               <%= form.label "Transaction Type:", class: "pad2" %>
 
-              <% if @wallets.count.to_i < 1 %>
+              <% if !@wallets %>
               <%= form.label "Please open a wallet", class: "pad2" %>
               <%else%>
                 <%= form.radio_button :transaction_type, 'BUY', :checked => true %> 
@@ -55,7 +55,7 @@
           </div>
   
           <div>
-            <% if current_user.approved? && @wallets.count.to_i > 0 %>
+            <% if current_user.approved? && @wallets %>
               <%= form.submit "CONFIRM", class: "btn btn-success" %>
             <% end %>
           </div>
