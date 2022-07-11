@@ -5,6 +5,13 @@
         <h2>My Portfolio</h2>
         <div class="add-users">
           <%= link_to ' Add stocks', home_index_path, class: "nav-link bi-plus-square"%>
+          <% if @wallets.count.to_i < 1 %>
+          <%= link_to ' Open wallet', new_userwallet_path, class: "nav-link bi-wallet2"%>
+          <%else%>
+            <% @wallets.each do |wallet|%>
+            <p>₱ <%= wallet.amount%></p>
+            <%end%>
+          <%end%>
         </div>
       </div>
     </div>
@@ -55,8 +62,6 @@
       <th></th>
       <th></th>
       <th></th>
-      <th>MY WALLET</th>
-      <th>₱ </th>
       <th></th>
       </tr>
     </tfoot>

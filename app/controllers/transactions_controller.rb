@@ -1,4 +1,5 @@
 class TransactionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :initialize_iex_client
 
   def index
@@ -12,6 +13,7 @@ class TransactionsController < ApplicationController
     @price = @client.quote(@symbol)
     @company = @client.company(@symbol)
     @logo = @client.logo(@symbol)
+    @wallets = current_user.userwallets
     @portfolio = current_user.portfolios.find_by(symbol: @symbol)
     if @portfolio == nil
       @user_shares = 0
