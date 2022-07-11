@@ -24,13 +24,12 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = current_user.transactions.build(transaction_params)
-    if @transaction.save
+    ActiveRecord::Base.transaction do 
+      @transaction = current_user.transactions.build(transaction_params)
+      @transaction.save
       update_portfolio
       update_wallet
       redirect_to portfolio_index_path, notice: "Portfolio updated!"
-    else
-      render :new
     end
   end
 
