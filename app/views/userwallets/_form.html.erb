@@ -1,7 +1,7 @@
 <%= form_with(model: userwallet) do |form| %>
   <% if userwallet.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(userwallet.errors.count, "error") %> prohibited this userwallet from being saved:</h2>
+    <div id="error_explanation" class="text-left">
+      <h6><%= pluralize(userwallet.errors.count, "error") %> prohibited this userwallet from being saved:</h6>
 
       <ul>
         <% userwallet.errors.each do |error| %>

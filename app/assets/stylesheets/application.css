@@ -217,6 +217,7 @@ a {
   width: 20rem}
 
 tfoot {
-  border-color: #354152;
+  border-color: #354152;}
 
-}
+.text-left {
+    text-align: left!important;}
