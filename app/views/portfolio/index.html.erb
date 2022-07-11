@@ -25,14 +25,12 @@
         <th>QTY</th>
         <th>COST PRICE</th>
         <th>TOTAL</th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
       <% if @portfolios.count == 0 %>
       <tr>
         <td><i> No data available in table </i></td>
-        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -47,10 +45,6 @@
             <td><%= portfolio.shares%></td>
             <td>₱ <%= portfolio.cost_price%></td>
             <td>₱ <%= portfolio.shares * portfolio.cost_price%></td>
-            <td class="center">
-              <%= link_to ' BUY', home_index_path, class: "btn btn-show bi-bag" %>
-              <%= link_to ' SELL', home_index_path, class: "btn btn-show bi-coin" %>
-            </td>
           </tr>
         <%end%>
       <% end %>
