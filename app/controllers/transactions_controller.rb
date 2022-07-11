@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :initialize_iex_client
+rescue_from IEX::Errors::SymbolNotFoundError, with: :symbol_not_found
 
   def index
     @logs = Transaction.all.order("created_at DESC")
@@ -57,6 +58,10 @@ class TransactionsController < ApplicationController
       @portfolio.save
     end
 
+  end
+
+  def symbol_not_found
+    redirect_to home_index_path, notice: "Symbol not found"
   end
 
 
