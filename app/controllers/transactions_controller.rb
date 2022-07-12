@@ -29,7 +29,14 @@ class TransactionsController < ApplicationController
       @transaction.save
       update_portfolio
       update_wallet
-      redirect_to portfolio_index_path, notice: "Portfolio updated!"
+      if !@balance
+        redirect_to portfolio_index_path, notice: "Portfolio updated!"
+      else
+        redirect_to home_index_path, notice: "Insufficient balance to purchase #{@transaction.shares.to_i} #{@transaction.symbol} shares!"
+        raise ActiveRecord::Rollback
+
+
+      end
     end
   end
 
@@ -48,8 +55,7 @@ class TransactionsController < ApplicationController
     @user_portfolio = current_user.portfolios.find_by(symbol: @transaction.symbol)
     if @user_portfolio
       if @transaction.transaction_type == "BUY"
-        @update_stocks = @user_portfolio.shares + @transaction.shares
-        @user_portfolio.update_attribute(:shares, @update_stocks)
+        wallet_validation
       else
         @update_stocks = @user_portfolio.shares - @transaction.shares
         @user_portfolio.update_attribute(:shares, @update_stocks)
@@ -65,13 +71,26 @@ class TransactionsController < ApplicationController
     @user_wallet = current_user.userwallets.find_by(user_id: current_user)
     @transaction_total = @transaction.shares * @transaction.cost_price
     if @transaction.transaction_type == "BUY"
-      @deduct_wallet = @user_wallet.amount - @transaction_total
-      @user_wallet.update_attribute(:amount, @deduct_wallet)
+      wallet_validation
     else
       @add_wallet = @user_wallet.amount + @transaction_total
       @user_wallet.update_attribute(:amount, @add_wallet)
     end
   end
 
+  def wallet_validation
+    @user_portfolio = current_user.portfolios.find_by(symbol: @transaction.symbol)
+    @user_wallet = current_user.userwallets.find_by(user_id: current_user)
+    @transaction_total = @transaction.shares * @transaction.cost_price
+    @balance = @user_wallet.amount < @transaction_total
+    if @balance
+      flash.now[:notice] = 'Message sent!'
+    else
+      @deduct_wallet = @user_wallet.amount - @transaction_total
+      @user_wallet.update_attribute(:amount, @deduct_wallet)
 
+      @update_stocks = @user_portfolio.shares + @transaction.shares
+      @user_portfolio.update_attribute(:shares, @update_stocks)
+    end
+  end
 end
