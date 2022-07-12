@@ -24,7 +24,7 @@
           <div class="mb-3">
             <%if @user_shares.to_i >= 1%>
               <%= form.label "Shares: (max shares to sell: #{@user_shares.to_i})" %>
-              <%= form.number_field :shares, value: 1,min: 1,max: @user_shares.to_i, class: "form-control" %>
+              <%= form.number_field :shares, value: 1,min: 1, class: "form-control" %>
   
             <%else%>
               <%= form.label "Shares:" %>
