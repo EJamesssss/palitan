@@ -3,8 +3,7 @@ class TransactionsController < ApplicationController
   before_action :initialize_iex_client
 
   def index
-    @logs = Transaction.all.order("created_at DESC").page params[:page]
-    @transactions =  current_user.transactions.order("created_at DESC")
+    @transactions =  current_user.transactions.order("created_at DESC").page params[:page]
   end
 
 
@@ -34,8 +33,6 @@ class TransactionsController < ApplicationController
       else
         redirect_to home_index_path, notice: "Insufficient balance to purchase #{@transaction.shares.to_i} #{@transaction.symbol} shares!"
         raise ActiveRecord::Rollback
-
-
       end
     end
   end
@@ -83,9 +80,7 @@ class TransactionsController < ApplicationController
     @user_wallet = current_user.userwallets.find_by(user_id: current_user)
     @transaction_total = @transaction.shares * @transaction.cost_price
     @balance = @user_wallet.amount < @transaction_total
-    if @balance
-      flash.now[:notice] = 'Message sent!'
-    else
+    if !@balance
       @deduct_wallet = @user_wallet.amount - @transaction_total
       @user_wallet.update_attribute(:amount, @deduct_wallet)
 
