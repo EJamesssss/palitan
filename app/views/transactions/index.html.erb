@@ -88,6 +88,10 @@
             </tr>
           <% end %>
         </tbody>
+        <tfoot>
+          <th><%= paginate @logs, theme: 'bootstrap-5',pagination_class: "pagination-sm flex-wrap justify-content-center",
+            nav_class: "d-inline-block"%></th>
+        </tfoot>
       </table>
     </div>  
   </div>
