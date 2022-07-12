@@ -52,7 +52,7 @@ class TransactionsController < ApplicationController
     @user_portfolio = current_user.portfolios.find_by(symbol: @transaction.symbol)
     if @user_portfolio
       if @transaction.transaction_type == "BUY"
-        wallet_validation
+        stock_validation
       else
         @update_stocks = @user_portfolio.shares - @transaction.shares
         @user_portfolio.update_attribute(:shares, @update_stocks)
@@ -83,7 +83,15 @@ class TransactionsController < ApplicationController
     if !@balance
       @deduct_wallet = @user_wallet.amount - @transaction_total
       @user_wallet.update_attribute(:amount, @deduct_wallet)
+    end
+  end
 
+  def stock_validation
+    @user_portfolio = current_user.portfolios.find_by(symbol: @transaction.symbol)
+    @user_wallet = current_user.userwallets.find_by(user_id: current_user)
+    @transaction_total = @transaction.shares * @transaction.cost_price
+    @balance = @user_wallet.amount < @transaction_total
+    if !@balance
       @update_stocks = @user_portfolio.shares + @transaction.shares
       @user_portfolio.update_attribute(:shares, @update_stocks)
     end
