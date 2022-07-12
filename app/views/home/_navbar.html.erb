@@ -10,7 +10,7 @@
                     <% if current_user.admin%>
 
                         <li class="nav-item">
-                            <%= link_to "Transaction History", transactions_path, class: "nav-link"%>
+                            <%= link_to "My Transaction History", transactions_path, class: "nav-link"%>
                         </li>
 
                         <li class="nav-item">
@@ -26,6 +26,14 @@
                         </li> 
 
                         <li class="nav-item">
+                            <%= link_to "Transaction Logs", admin_transaction_index_path, class: "nav-link"%>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"></a>
+                        </li>
+
+                        <li class="nav-item">
                             <%= link_to "List of Users", admin_users_path, class: "nav-link"%>
                         </li>
 
@@ -38,7 +46,7 @@
                         </li>
                     <% else %>
                         <li class="nav-item">
-                            <%= link_to "Transaction History", transactions_path, class: "nav-link"%>
+                            <%= link_to "My Transaction History", transactions_path, class: "nav-link"%>
                         </li>
 
                         <li class="nav-item">
