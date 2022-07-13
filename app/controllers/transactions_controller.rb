@@ -44,12 +44,6 @@ class TransactionsController < ApplicationController
           redirect_to portfolio_index_path, notice: "Portfolio updated!"
         end
       end
-      # if !@balance or !@owned_stocks
-      #   redirect_to portfolio_index_path, notice: "Portfolio updated!"
-      # else
-      #   redirect_to request.referrer, notice: "Insufficient balance to purchase #{@transaction.shares.to_i} #{@transaction.symbol} shares!"
-      #   raise ActiveRecord::Rollback
-      # end
     end
   end
 
