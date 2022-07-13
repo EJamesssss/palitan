@@ -234,3 +234,8 @@ tfoot {
 .text-right {
   text-align: right!important;}
 
+.wallet {
+  display: flex;}
+
+.wallet > p {
+  margin-left: 0.5rem;}

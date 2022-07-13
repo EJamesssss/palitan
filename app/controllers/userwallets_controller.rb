@@ -18,6 +18,7 @@ class UserwalletsController < ApplicationController
 
   # GET /userwallets/1/edit
   def edit
+    @amount = Userwallet.find(params[:id])
   end
 
   # POST /userwallets
@@ -33,10 +34,12 @@ class UserwalletsController < ApplicationController
 
   # PATCH/PUT /userwallets/1
   def update
-    if @userwallet.update(userwallet_params)
-      redirect_to portfolio_index_path, notice: 'Userwallet was successfully updated.'
+    @amount = Userwallet.find(params[:id])
+    @total = @amount.amount.to_f + userwallet_params[:amount].to_f
+    if @amount.update_attribute(:amount, @total)
+    redirect_to portfolio_index_path, notice: "#{userwallet_params[:amount].to_f} was successfull added to your wallet."
     else
-      render :edit
+      redirect_to request.referrer
     end
   end
 
