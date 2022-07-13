@@ -23,14 +23,6 @@
 
                         <li class="nav-item">
                             <a class="nav-link"></a>
-                        </li> 
-
-                        <li class="nav-item">
-                            <%= link_to "Transaction Logs", admin_transaction_index_path, class: "nav-link"%>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link"></a>
                         </li>
 
                         <li class="nav-item">
@@ -70,6 +62,9 @@
                             </a>
                             <div class="dropdown-content">
                                 <%= link_to ' Edit Profile', edit_user_registration_path, class:"nav-link bi-pencil-square" %>
+                                <% if current_user.admin%>
+                                    <%= link_to " Transaction Logs", admin_transaction_index_path, class: "nav-link bi-clock-history"%>
+                                <% end %>
                                 <%= link_to " Sign Out", destroy_user_session_path, method: :delete, class:"nav-link bi-box-arrow-right" %>
                             </div>
                         </li>

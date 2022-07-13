@@ -155,7 +155,7 @@ a {
 .table-box {
   border: solid 1px #b3b3b3;
   margin-top: 2rem;
-  padding: 2rem;
+  padding: 2rem 2rem 0 2rem;
   border-radius: 1rem;}
 
 .table {
@@ -221,3 +221,16 @@ tfoot {
 
 .text-left {
     text-align: left!important;}
+
+.page-link {
+  color: #354152;
+  background-color: #c3c9d5;}
+
+.active>.page-link {
+  background-color: #5f6d86;
+  color: #c3c9d5;
+  border-color: #dee2e6;}
+
+.text-right {
+  text-align: right!important;}
+

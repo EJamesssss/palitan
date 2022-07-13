@@ -8,7 +8,7 @@
           <% if !@wallets %>
             <%= link_to ' Open wallet', new_userwallet_path, class: "nav-link bi-wallet2"%>
           <%else%>
-            <p>₱ <%= @wallets.amount%></p>
+            <p>₱ <%= @wallets.amount.round(2)%></p>
           <%end%>
         </div>
       </div>
@@ -43,8 +43,8 @@
             <td><%= portfolio.symbol%></td>
             <td><%= portfolio.company_name%></td>
             <td><%= portfolio.shares%></td>
-            <td>₱ <%= portfolio.cost_price%></td>
-            <td>₱ <%= portfolio.shares * portfolio.cost_price%></td>
+            <td>₱ <%= portfolio.cost_price.round(2)%></td>
+            <td>₱ <%= (portfolio.shares * portfolio.cost_price).round(2)%></td>
           </tr>
         <%end%>
       <% end %>
