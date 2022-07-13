@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :initialize_iex_client
+  rescue_from IEX::Errors::SymbolNotFoundError, with: :symbol_not_found
 
   def index
     @transactions =  current_user.transactions.order("created_at DESC").page params[:page]
@@ -28,12 +29,27 @@ class TransactionsController < ApplicationController
       @transaction.save
       update_portfolio
       update_wallet
-      if !@balance
-        redirect_to portfolio_index_path, notice: "Portfolio updated!"
-      else
-        redirect_to home_index_path, notice: "Insufficient balance to purchase #{@transaction.shares.to_i} #{@transaction.symbol} shares!"
-        raise ActiveRecord::Rollback
+      if @transaction.transaction_type == "BUY"
+        if @balance
+          redirect_to request.referrer, notice: "Insufficient balance to purchase #{@transaction.shares.to_i} #{@transaction.symbol} shares!"
+          raise ActiveRecord::Rollback
+        else
+          redirect_to portfolio_index_path, notice: "Portfolio updated!"
+        end
+      elsif @transaction.transaction_type == "SELL"
+        if @user_portfolio.shares < @transaction.shares
+          redirect_to request.referrer, notice: "Insufficient stocks to sell!"
+          raise ActiveRecord::Rollback
+        else
+          redirect_to portfolio_index_path, notice: "Portfolio updated!"
+        end
       end
+      # if !@balance or !@owned_stocks
+      #   redirect_to portfolio_index_path, notice: "Portfolio updated!"
+      # else
+      #   redirect_to request.referrer, notice: "Insufficient balance to purchase #{@transaction.shares.to_i} #{@transaction.symbol} shares!"
+      #   raise ActiveRecord::Rollback
+      # end
     end
   end
 
@@ -46,6 +62,10 @@ class TransactionsController < ApplicationController
 
   def transaction_params
     params.require(:transaction).permit(:user_id, :symbol, :company_name, :shares, :cost_price, :transaction_type)
+  end
+
+  def symbol_not_found
+    redirect_to home_index_path, notice: "Symbol not found"
   end
 
   def update_portfolio
