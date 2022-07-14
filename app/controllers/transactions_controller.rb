@@ -37,7 +37,7 @@ class TransactionsController < ApplicationController
           redirect_to portfolio_index_path, notice: "Portfolio updated!"
         end
       elsif @transaction.transaction_type == "SELL"
-        if @user_portfolio.shares < @transaction.shares
+        if @owned_stocks
           redirect_to request.referrer, notice: "Insufficient stocks to sell!"
           raise ActiveRecord::Rollback
         else
@@ -67,9 +67,8 @@ class TransactionsController < ApplicationController
     if @user_portfolio
       if @transaction.transaction_type == "BUY"
         stock_validation
-      else
-        @update_stocks = @user_portfolio.shares - @transaction.shares
-        @user_portfolio.update_attribute(:shares, @update_stocks)
+      elsif @transaction.transaction_type == "SELL"
+        sell_validation
       end
     else
       @portfolio = current_user.portfolios.build(params.require(:transaction).permit(:user_id, :symbol, :company_name, :shares, :cost_price))
@@ -107,6 +106,16 @@ class TransactionsController < ApplicationController
     @balance = @user_wallet.amount < @transaction_total
     if !@balance
       @update_stocks = @user_portfolio.shares + @transaction.shares
+      @user_portfolio.update_attribute(:shares, @update_stocks)
+    end
+  end
+
+  def sell_validation
+    @user_portfolio = current_user.portfolios.find_by(symbol: @transaction.symbol)
+    @user_wallet = current_user.userwallets.find_by(user_id: current_user)
+    @owned_stocks = @user_portfolio.shares < @transaction.shares
+    if !@owned_stocks
+      @update_stocks = @user_portfolio.shares - @transaction.shares
       @user_portfolio.update_attribute(:shares, @update_stocks)
     end
   end
