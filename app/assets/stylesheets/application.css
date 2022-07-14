@@ -239,3 +239,11 @@ tfoot {
 
 .wallet > p {
   margin-left: 0.5rem;}
+
+.footer-list {
+  display: flex;
+  margin: 0 2rem;
+  justify-content: space-between;}
+
+a:link {
+  text-decoration: none;}
