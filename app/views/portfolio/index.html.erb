@@ -52,13 +52,8 @@
         <%end%>
       <% end %>
     </tbody>
-    <tfoot>
-      <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      </tr>
-    </tfoot>
   </table>
+  <div class="card-footer text-right">
+    <%= paginate @portfolios, theme: 'bootstrap-5',pagination_class: "pagination-sm flex-wrap justify-content-center", nav_class: "d-inline-block"%>
+  </div>
 </div>

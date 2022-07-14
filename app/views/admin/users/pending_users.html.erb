@@ -10,6 +10,14 @@
             </tr>
         </thead>
         <tbody>
+            <% if @unapproved.count == 0 %>
+                <tr>
+                    <td><i> No data available in table </i></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            <% end %>
             <% @unapproved.each do |waiting|%>
                 <%if waiting.confirmed?%>
                     <tr>
