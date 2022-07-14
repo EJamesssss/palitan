@@ -16,9 +16,12 @@
       <% end %>
     </div>
     <div class="card-footer">
+      <div class=" footer-list">
+        <a href="https://iextrading.com/trading/eligible-symbols/" target="_blank" class="bi bi-card-checklist"> List of Eligible Symbol</a>
         <% if current_user.approved? %>
             <%= link_to ' Back', portfolio_index_path, class: "bi-arrow-left-short space" %>
         <% end %>
+      </div>
     </div>
   </div>
 </div>
