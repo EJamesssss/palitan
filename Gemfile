@@ -58,3 +58,4 @@ gem 'net-imap', require: false
 gem 'iex-ruby-client'
 gem 'kaminari'
 gem 'bootstrap5-kaminari-views'
+gem 'mailjet'

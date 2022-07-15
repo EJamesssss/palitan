@@ -9,7 +9,10 @@ class UnapprovedMailer < ApplicationMailer
     @greeting = "Hi"
     @user = params[:user]
 
-    mail to: @user.email,
-    subject: "Welcome to palitan.com!"
+    # mail to: @user.email,
+    # subject: "Welcome to palitan.com!"
+
+    mail(from: "welcome@palitan.com", to: @user.email,
+          subject: "Welcom to palitan.com!")
   end
 end
