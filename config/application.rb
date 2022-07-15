@@ -19,7 +19,5 @@ module Palitan
     config.time_zone = "Asia/Singapore"
     config.active_record.default_timezone = :local
     # config.eager_load_paths << Rails.root.join("extras")
-
-    config.action_mailer.delivery_method = :mailjet
   end
 end
